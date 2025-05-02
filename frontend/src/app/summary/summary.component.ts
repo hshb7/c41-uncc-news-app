@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-summary',
@@ -23,7 +24,7 @@ export class SummaryComponent implements OnInit {
     };
     // Add timestamp to prevent caching
     const timestamp = new Date().getTime();
-    this.http.get(`http://localhost:3000/api/chart1?t=${timestamp}`, { headers }).subscribe({
+    this.http.get(`${environment.apiUrl}/chart1?t=${timestamp}`, { headers }).subscribe({
       next: (data) => { 
         this.chartData = data; 
         this.loading = false; 
