@@ -1,0 +1,11 @@
+<main aria-label="Login Page" class="login-main">
+  <form (submit)="login(); $event.preventDefault()" aria-label="Login form">
+    <h2>Login</h2>
+    <label for="username">Username</label>
+    <input id="username" name="username" [(ngModel)]="username" required aria-required="true" autocomplete="username" />
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" [(ngModel)]="password" required aria-required="true" autocomplete="current-password" />
+    <button type="submit">Login</button>
+    <div *ngIf="error" class="error" aria-live="polite">{{ error }}</div>
+  </form>
+</main>

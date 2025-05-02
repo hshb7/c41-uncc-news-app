@@ -1,0 +1,31 @@
+<main aria-label="Summary Page" class="summary-main">
+  <h1>UNCC Research Growth to R1 Status</h1>
+  <section *ngIf="loading" aria-live="polite">Loading chart data...</section>
+  <section *ngIf="error" class="error" aria-live="polite">{{ error }}</section>
+  <section *ngIf="chartData && !loading">
+    <div class="chart-container">
+      <h2>{{ chartData.title }}</h2>
+      <div class="chart-info">
+        <p class="chart-subtitle">Annual Research Expenditure (in millions of dollars)</p>
+        <div class="r1-threshold">R1 Status Threshold: $50 million</div>
+      </div>
+      <div class="chart-placeholder">
+        <div class="chart-threshold-line"></div>
+        <div class="chart-bars-container">
+          <div *ngFor="let val of chartData.data; let i = index" class="chart-bar" 
+               [style.height.px]="val * 1.5">
+            <span class="chart-label">{{ chartData.labels[i] }}</span>
+            <span class="chart-value">${{ val }}M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <p>{{ chartData.description }}</p>
+      <div class="achievement-highlight">
+        <strong>Achievement:</strong> In fiscal year 2022-2023, UNCC exceeded the R1 threshold by $42 million, with research expenditures totaling $92 million, nearly doubling from the previous year.
+      </div>
+      <p><strong>Source:</strong> University Office of Research, Carnegie Classification of Institutions of Higher Education</p>
+    </div>
+  </section>
+</main>

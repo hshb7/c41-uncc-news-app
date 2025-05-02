@@ -1,0 +1,64 @@
+<main aria-label="Reports Page" class="reports-main">
+  <h1>UNC Charlotte Research Expenditures (FY2023)</h1>
+  <section *ngIf="loading" aria-live="polite">Loading data...</section>
+  <section *ngIf="error" class="error" aria-live="polite">{{ error }}</section>
+  <section *ngIf="chartData && !loading">
+    <div class="chart-container">
+      <h2>{{ chartData.title }}</h2>
+      <p class="chart-subtitle">Detailed breakdown by academic field</p>
+
+      <!-- Simple bar chart representation -->
+      <div class="data-visualization">
+        <div class="total-budget">
+          <div class="total-value">Total Research Expenditure: $92M</div>
+          <div class="total-subtitle">Fiscal Year 2022-2023</div>
+        </div>
+
+        <!-- Visual bars representing proportions -->
+        <div class="horizontal-bars">
+          <div *ngFor="let val of chartData.data; let i = index" class="bar-item">
+            <div class="bar-label">{{ chartData.labels[i] }}</div>
+            <div class="bar-wrapper">
+              <div class="bar-progress" [style.width.%]="val" [style.background-color]="colors[i]"></div>
+            </div>
+            <div class="bar-values">
+              <span class="bar-percentage">{{ val }}%</span>
+              <span class="bar-amount" *ngIf="chartData.expenditures">${{ chartData.expenditures[i] }}M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data table representation -->
+      <div class="research-table">
+        <div class="table-header">
+          <div class="col-field">Academic Field</div>
+          <div class="col-amount">Amount (millions)</div>
+          <div class="col-percent">Percentage</div>
+        </div>
+        <div *ngFor="let val of chartData.data; let i = index" class="table-row">
+          <div class="col-field">
+            <span class="color-indicator" [style.background-color]="colors[i]"></span>
+            {{ chartData.labels[i] }}
+          </div>
+          <div class="col-amount">${{ chartData.expenditures[i] }}M</div>
+          <div class="col-percent">{{ val }}%</div>
+        </div>
+        <div class="table-footer">
+          <div class="col-field">Total</div>
+          <div class="col-amount">$92.00M</div>
+          <div class="col-percent">100%</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chart-info-box">
+      <h3>Key Findings</h3>
+      <p>{{ chartData.description }}</p>
+      <div class="r1-note">
+        <strong>R1 Classification Impact:</strong> The 2022-2023 research expenditure of $92 million represents a significant milestone in UNCC's path to R1 Carnegie classification, exceeding the R1 threshold by $42 million.
+      </div>
+      <p><strong>Source:</strong> University Office of Research, Carnegie Classification of Institutions of Higher Education</p>
+    </div>
+  </section>
+</main>

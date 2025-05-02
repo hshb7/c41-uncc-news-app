@@ -1,0 +1,17 @@
+[Unit]
+Description=C41 UNCC News App Backend
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/path/to/c41-app/backend
+ExecStart=/usr/bin/node /path/to/c41-app/backend/index.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=c41-backend
+
+[Install]
+WantedBy=multi-user.target

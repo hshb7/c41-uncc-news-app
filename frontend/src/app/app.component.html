@@ -1,0 +1,12 @@
+<!-- Only show navigation when logged in -->
+<nav *ngIf="auth.isLoggedIn()" aria-label="Main navigation" class="top-nav">
+  <div class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/summary" routerLinkActive="active">Summary</a>
+    <a routerLink="/reports" routerLinkActive="active">Reports</a>
+  </div>
+  <div class="nav-actions">
+    <button (click)="auth.logout()" aria-label="Logout" class="logout-btn">Logout</button>
+  </div>
+</nav>
+<router-outlet></router-outlet>
