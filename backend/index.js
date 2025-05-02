@@ -60,7 +60,9 @@ function initializeUserModel() {
 
 // Configure CORS to allow requests from Angular frontend
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 app.use(express.json());
